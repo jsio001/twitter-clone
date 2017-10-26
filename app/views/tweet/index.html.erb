@@ -1,0 +1,9 @@
+<h1>Twitter</h1>
+<h2>All My Tweets</h2>
+<%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+
+<ul>
+<% @book.each do |book| %>
+  <li><%= tweet %></li>
+<% end %>
+</ul>
