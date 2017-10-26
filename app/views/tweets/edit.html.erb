@@ -1,0 +1,6 @@
+<h1>Edit Tweet</h1>
+<%= link_to 'Home', root_path, method: :get %>
+<%= simple_form_for @tweet, url: tweet_path(@tweet), method: :put do |f| %>
+<%= f.input :tweet %>
+<%= f.button :submit, "Update Tweet" %>
+<% end %>

@@ -1,10 +1,18 @@
 <h1>Welcome to Twitter</h1>
+<%= link_to 'New Tweet', new_tweet_path, method: :get %>
 
-<%= link_to "Log in", new_user_session_path, method: :get %>
-<br>
+<h2>All My Tweets</h2>
 
-<h2>New to Twitter? Sign up</h2>
-<%= link_to "Sign up", new_user_registration_path, method: :get %>
 
-<br>
-<%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+<table>
+  <tbody>
+    <% current_user.tweets.each do |tweet| %>
+      <tr>
+        <th></th>
+        <td><%= tweet.tweet %></td>
+        <td><%= link_to 'Edit Tweet', edit_tweet_path(tweet) %></td>
+        <td><%= link_to 'Delete Tweet', tweet_path(tweet), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,11 @@
+<h1>Twitter</h1>
+<h2>New Tweet</h2>
+
+<%= simple_form_for @tweet, url: tweets_path, method: :post do |f| %>
+  <%= f.input :tweet %>
+  <br>
+  <%= f.button :submit %>
+<% end %>
+<br>
+
+  <%= link_to 'Home', root_path %>
