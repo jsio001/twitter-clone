@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+ body {
+   font-family: 'Exo 2', serif;
+ }
+ .full-img {
+   height: 900px;
+   background: url("rootbg-poolside.jpg");
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+ }

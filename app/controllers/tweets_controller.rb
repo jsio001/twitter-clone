@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
 
   def index
-    @tweet = current_user.tweets.all
+    @tweet = current_user.tweets
   end
 
   def new
