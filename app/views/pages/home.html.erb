@@ -1,7 +1,39 @@
-<h1>Welcome to Twitter</h1>
+<h1>Welcome!</h1>
+<br>
 <%= link_to 'New Tweet', new_tweet_path, method: :get %>
 
-<h2>All My Tweets</h2>
+<div class="container-fluid">
+  <div class="row align-items-center" style="height: 60%;">
+    <div class="col">
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-5">
+          <div class="card">
+            <div class="card-body">
+              <%= simple_form_for current_user.tweets.build, url: tweets_path(current_user), method: :post do |f| %>
+                <%= f.input :tweet, required: false, label: false, placeholder: "What's Happening?" %>
+                <br>
+                <%= f.button :submit %>
+              <% end %>
+            </div>
+          </div>
+          <br>
+          <div class="card">
+            <% current_user.tweets.each do |tweet| %>
+              <div class="card-body">
+                <%= tweet.tweet %>
+                <%= link_to 'Edit Tweet', edit_tweet_path(current_user,tweet) %>
+                <%= link_to 'Delete Tweet', tweet_path(current_user,tweet), method: :delete %>
+              </div>
+            <% end %>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <table>
@@ -10,8 +42,8 @@
       <tr>
         <th></th>
         <td><%= tweet.tweet %></td>
-        <td><%= link_to 'Edit Tweet', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Delete Tweet', tweet_path(tweet), method: :delete %></td>
+        <td><%= link_to 'Edit Tweet', edit_tweet_path(current_user,tweet) %></td>
+        <td><%= link_to 'Delete Tweet', tweet_path(current_user,tweet), method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
