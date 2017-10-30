@@ -24,7 +24,7 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    @tweet = current_user.tweets.find(params[:id])
+    @tweet = current_user.tweets.find(tweet_params)
   end
 
   def update
@@ -37,12 +37,13 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    @tweet = current_user.tweets.find(params[:id])
+    @tweet = Tweet.find(params[:id])
     @tweet.destroy
     redirect_to root_path
   end
 
 private
+
   def tweet_params
     params.require(:tweet).permit(:tweet)
   end
