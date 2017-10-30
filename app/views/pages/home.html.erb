@@ -23,8 +23,9 @@
             <% current_user.tweets.each do |tweet| %>
               <div class="card-body">
                 <%= tweet.tweet %>
-                <%= link_to 'Edit Tweet', edit_tweet_path(current_user,tweet) %>
-                <%= link_to 'Delete Tweet', tweet_path(current_user,tweet), method: :delete %>
+                <br>
+                <!-- <%= link_to 'Edit Tweet', edit_tweet_path(current_user,tweet) %>
+                <%= link_to 'Delete Tweet', tweet_path(current_user,tweet), method: :delete %> -->
               </div>
             <% end %>
           </div>
@@ -34,17 +35,3 @@
     </div>
   </div>
 </div>
-
-
-<table>
-  <tbody>
-    <% current_user.tweets.each do |tweet| %>
-      <tr>
-        <th></th>
-        <td><%= tweet.tweet %></td>
-        <td><%= link_to 'Edit Tweet', edit_tweet_path(current_user,tweet) %></td>
-        <td><%= link_to 'Delete Tweet', tweet_path(current_user,tweet), method: :delete %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
