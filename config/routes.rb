@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to:'pages#home'
 
   resources :tweets do
-    resources :tags, except: [:show, :index]
+    resources :tags, except: [:edit, :update]
   end
 
 end
