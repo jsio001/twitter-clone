@@ -1,3 +1,4 @@
 class Tag < ApplicationRecord
-  belongs_to :tweet
+  has_many :tweet_tags, dependent: :destroy
+  has_many :tweets, through: :tweet_tags
 end

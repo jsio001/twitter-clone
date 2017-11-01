@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
 
   def index
-    @tweet = current_user.tweets
+    @tweets = current_user.tweets
   end
 
   def new
@@ -13,18 +13,18 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to root_path
     else
-      render :new
-      flash[:error] = "cannot save"
+      flash[:alert] = "Tweet is empty."
+      redirect_to root_path
     end
   end
 
   def show
     # show any tweet based on id, regardless of whether user is author
-    @tweet = Tweet.find(params[:id])
+    @tweet = current_user.tweets.find(params[:id])
   end
 
   def edit
-    @tweet = current_user.tweets.find(tweet_params)
+    @tweet = Tweet.find(params[:id])
   end
 
   def update
@@ -37,7 +37,7 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    @tweet = Tweet.find(params[:id])
+    @tweet = current_user.tweets.find(params[:id])
     @tweet.destroy
     redirect_to root_path
   end

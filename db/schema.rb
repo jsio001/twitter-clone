@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20171030161331) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["poster_id"], name: "index_relations_on_poster_id"
-    t.index ["subscriber_id", "poster_id"], name: "index_relations_on_subscriber_id_and_poster_id"
+    t.index ["subscriber_id", "poster_id"], name: "index_relations_on_subscriber_id_and_poster_id", unique: true
     t.index ["subscriber_id"], name: "index_relations_on_subscriber_id"
   end
 
