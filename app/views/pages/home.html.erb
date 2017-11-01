@@ -5,15 +5,6 @@
     <div class="col">
       <div class="row">
 
-        <div class="col-sm-2">
-          <h3>Users to follow</h3>
-          <% @users = User.all %>
-          <% @users.each do |user| %>
-            <p><%= user.username %></p>
-            <%= link_to(:controller => "application", :action => "relate", :poster_id => user.id) %>
-          <% end %>
-        </div>
-
         <div class="col-sm-5">
           <div class="card">
             <div class="card-body">
@@ -25,18 +16,39 @@
             </div>
           </div>
           <br>
-          <div class="card">
-            <% current_user.tweets.each do |tweet| %>
+          <% @tweets.each do |tweet| %>
+            <div class="card">
               <div class="card-body">
+                <%= tweet.created_at %>
                 <%= tweet.tweet %>
-                <br>
-                <!-- <%= link_to 'Edit Tweet', edit_tweet_path(current_user,tweet) %>
-                <%= link_to 'Delete Tweet', tweet_path(current_user,tweet), method: :delete %> -->
+                <%= link_to 'Edit', edit_tweet_path(tweet) if tweet.id %>
+                <%= link_to 'Delete', tweet_path(tweet), method: :delete, data: { confirm: 'Sure?' } if tweet.id %>
               </div>
-            <% end %>
-          </div>
-          <br>
+            </div>
+          <% end %>
         </div>
+        <div class="col-sm-2">
+          <div class="row">
+            <h3>Own Stats</h3>
+            <ul>
+              <li><%= current_user.posters.count %> following</li>
+              <li><%= current_user.subscribers.count %> followers</li>
+            </ul>
+          </div>
+          <div class="row">
+            <h3>Who to follow</h3>
+            <% @users = User.all %>
+            <ul>
+            <% @users.each do |user| %>
+              <li><%= user.username %> ID#<%= user.id %>
+                <%= link_to "Follow", follow_path(user), method: :post %>
+                <%= link_to "UnFollow", unfollow_path(user), method: :delete %>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

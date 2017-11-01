@@ -33,15 +33,11 @@
         <% end %>
       </p>
     </nav>
-
-    <!-- <div class="alert alert-primary" role="alert">
-      <p class="notice"><%= notice %></p>
-    </div>
-    <div class="alert alert-danger" role="alert">
-      <p class="alert"><%= alert %></p>
-    </div> -->
-
+    <% flash.each do |key, value| %>
+      <p><%= "#{key}: #{value}" %></p>
+    <% end %>
+      <!-- <p class="notice"><%= notice %></p> -->
+      <!-- <p class="alert"><%= alert %></p> -->
     <%= yield %>
-
   </body>
 </html>

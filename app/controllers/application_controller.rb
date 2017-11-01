@@ -4,14 +4,25 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
     def relate
-      @follow = current_user.relations.build(subscriber_id: current_user, poster_id: params[:poster_id])
+      @follow = Relation.new(subscriber_id: current_user.id, poster_id: params[:id])
       if @follow.save
-        flash[:notice] = "Now following #{:user.username(poster_id)}"
+        flash[:notice] = "Now following."
+        redirect_to root_path
+      else
+        flash[:alert] = "Unable to follow user."
         redirect_to root_path
       end
     end
 
     def unrelate
+      @follow = Relation.find_by(subscriber_id: current_user.id, poster_id: params[:poster_id])
+      if @follow.destroy
+        flash[:notice] = "Unfollowed."
+        redirect_to root_path
+      else
+        flash[:alert] = "Unable to unfollow user."
+        redirect_to root_path
+      end
     end
 
   protected
