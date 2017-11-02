@@ -9,14 +9,14 @@ class ApplicationController < ActionController::Base
         flash[:notice] = "Now following."
         redirect_to root_path
       else
-        flash[:alert] = "Unable to follow user."
+        flash[:error] = "Unable to follow user."
         redirect_to root_path
       end
     end
 
     def unrelate
       @follow = Relation.find_by(subscriber_id: current_user.id, poster_id: params[:poster_id])
-      if @follow.destroy
+      if @follow != nil && @follow.destroy
         flash[:notice] = "Unfollowed."
         redirect_to root_path
       else
