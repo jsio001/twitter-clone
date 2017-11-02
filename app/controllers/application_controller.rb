@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
         flash[:notice] = "Now following."
         redirect_to root_path
       else
-        flash[:alert] = "Unable to follow user."
+        flash[:error] = "Unable to follow user."
         redirect_to root_path
       end
     end
