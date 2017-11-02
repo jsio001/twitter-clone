@@ -18,14 +18,13 @@
           <%= @tweets.each do |tweet| %>
             <div class="card">
               <div class="card-body">
-                <%= tweet.created_at.strftime("%d %b, %H:%M") %>
+                <%= tweet.created_at.strftime("%d %b, %H:%M") if tweet.id %>
                 <br>
                 <%= tweet.tweet %>
-                <%= link_to 'Edit', edit_tweet_path(tweet) %>
-                <%= link_to 'Delete', tweet_path(tweet), method: :delete, data: { confirm: 'Sure?' } %>
+                <%= link_to 'Edit', edit_tweet_path(tweet) if tweet.id %>
+                <%= link_to 'Delete', tweet_path(tweet), method: :delete, data: { confirm: 'Sure?' } if tweet.id %>
               </div>
             </div>
-            <br>
           <% end %>
         </div>
         <div class="col-sm-2" id="home-right">
@@ -43,7 +42,7 @@
               <li>
                 <%= user.username %>
                 <%= link_to "Follow", follow_path(user), method: :post if Relation.find_by(subscriber_id: current_user.id, poster_id: user.id) == nil %>
-                <%= link_to "UnFollow", unfollow_path(user), method: :delete %>
+                <%= link_to "UnFollow", unfollow_path(user), method: :delete if Relation.find_by(subscriber_id: current_user.id, poster_id: user.id) != nil %>
               </li>
               <% end %>
             </ul>

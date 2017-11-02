@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
     def unrelate
       @follow = Relation.find_by(subscriber_id: current_user.id, poster_id: params[:poster_id])
-      if @follow.destroy
+      if @follow != nil && @follow.destroy
         flash[:notice] = "Unfollowed."
         redirect_to root_path
       else
