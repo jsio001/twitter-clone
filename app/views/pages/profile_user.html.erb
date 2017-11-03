@@ -1,0 +1,33 @@
+<h1>This is <strong><%= @user.username %></strong>'s Page</h1>
+<%= link_to "Back to My Feed", root_path %>
+
+<div class="container-fluid">
+  <div class="row align-items-center" style="height: 60%;">
+    <div class="col">
+      <div class="row">
+
+        <div class="col-sm-2" id="profile-left">
+
+        </div>
+
+        <div class="col-sm-5" id="profile-center">
+          <% @tweets.each do |tweet| %>
+            <div class="card">
+              <div class="card-body">
+                <%= tweet.created_at.strftime("%d %b, %H:%M") %>
+                <br>
+                <%= tweet.tweet %>
+              </div>
+            </div>
+            <br>
+          <% end %>
+        </div>
+
+        <div class="col-sm-2" id="profile-right">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

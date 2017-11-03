@@ -1,16 +1,14 @@
 class TweetsController < ApplicationController
 
-  def new
-    @tweet = Tweet.new
-  end
-
   def create
     @tweet = current_user.tweets.new(tweet_params)
     if @tweet.save
-      redirect_to root_path
+      respond_to do |format|
+        format.html {redirect_to root_path}
+        format.js
+      end
     else
-      flash[:alert] = "Tweet is empty."
-      redirect_to root_path
+      flash.now[:alert] = "Tweet is empty."
     end
   end
 

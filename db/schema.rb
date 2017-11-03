@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030161331) do
+ActiveRecord::Schema.define(version: 20171103054906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "full_name"
+    t.text "about_me"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
 
   create_table "relations", force: :cascade do |t|
     t.bigint "subscriber_id"
@@ -60,6 +69,7 @@ ActiveRecord::Schema.define(version: 20171030161331) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "profiles", "users"
   add_foreign_key "relations", "users", column: "poster_id"
   add_foreign_key "relations", "users", column: "subscriber_id"
   add_foreign_key "tweet_tags", "tags"

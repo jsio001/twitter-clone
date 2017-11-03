@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # :rememberable, :trackable
   devise :database_authenticatable, :registerable, :recoverable, :validatable
+
+  has_one :profile, dependent: :destroy
+
   has_many :tweets, dependent: :destroy
 
   has_many :subscriber_users, class_name: "Relation", foreign_key: :poster_id, dependent: :destroy
