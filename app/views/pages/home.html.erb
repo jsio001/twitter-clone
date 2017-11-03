@@ -4,7 +4,11 @@
   <div class="row align-items-center" style="height: 60%;">
     <div class="col">
       <div class="row">
-        <div class="col-sm-5" id="home-middle">
+
+        <div class="col-sm-1" id="home-left">
+        </div>
+
+        <div class="col-sm-5" id="home-center">
           <div class="card">
             <div class="card-body">
               <%= simple_form_for current_user.tweets.build, url: tweets_path(current_user), method: :post do |f| %>
@@ -15,34 +19,47 @@
             </div>
           </div>
           <br>
-          <%= @tweets.each do |tweet| %>
+          <% @tweets.each do |tweet| %>
             <div class="card">
               <div class="card-body">
-                <%= tweet.created_at.strftime("%d %b, %H:%M") if tweet.id %>
+                <%= tweet.created_at.strftime("%d %b, %H:%M") %>
                 <br>
-                <%= tweet.tweet %>
-                <%= link_to 'Edit', edit_tweet_path(tweet) if tweet.id %>
-                <%= link_to 'Delete', tweet_path(tweet), method: :delete, data: { confirm: 'Sure?' } if tweet.id %>
+                <%= tweet.tweet[0,150] %>
+                &nbsp
+                <%= link_to 'Edit', edit_tweet_path(tweet) %>
+                <%= link_to 'Delete', tweet_path(tweet), method: :delete, data: { confirm: 'Sure?' } %>
               </div>
             </div>
+            <br>
           <% end %>
         </div>
+
         <div class="col-sm-2" id="home-right">
           <div class="row">
-            <h3>Own Stats</h3>
-            <ul>
-              <li><%= current_user.posters.count %> following</li>
-              <li><%= current_user.subscribers.count %> followers</li>
-            </ul>
+            <div class="card">
+              <div class="card-body">
+                <%= current_user.posters.count %> following
+                <br>
+                <%= current_user.subscribers.count %> followers
+              </div>
+            </div>
           </div>
+          <br>
           <div class="row">
-            <h3>Who to follow</h3>
+            My followers
+            <br>
+            Users I follow
+          </div>
+          <br>
+          <div class="row">
+            <h3>Suggested Users to Follow</h3>
             <ul>
               <% @users.each do |user| %>
               <li>
-                <%= user.username %>
-                <%= link_to "Follow", follow_path(user), method: :post if Relation.find_by(subscriber_id: current_user.id, poster_id: user.id) == nil %>
-                <%= link_to "UnFollow", unfollow_path(user), method: :delete if Relation.find_by(subscriber_id: current_user.id, poster_id: user.id) != nil %>
+                <%= link_to user.username, profile_path(user) %>
+                &nbsp
+                <%= link_to "follow", follow_path(user), method: :post if Relation.find_by(subscriber_id: current_user.id, poster_id: user.id) == nil %>
+                <%= link_to "UnF", unfollow_path(user), method: :delete if Relation.find_by(subscriber_id: current_user.id, poster_id: user.id) != nil %>
               </li>
               <% end %>
             </ul>
