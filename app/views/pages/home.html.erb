@@ -11,7 +11,7 @@
         <div class="col-sm-5" id="home-center">
           <div class="card">
             <div class="card-body">
-              <%= simple_form_for current_user.tweets.build, url: tweets_path(current_user), method: :post do |f| %>
+              <%= simple_form_for current_user.tweets.build, url: tweets_path(current_user), method: :post, remote: true do |f| %>
                 <%= f.input :tweet, required: false, label: false, placeholder: "What's Happening?" %>
                 <br>
                 <%= f.button :submit %>
@@ -19,19 +19,7 @@
             </div>
           </div>
           <br>
-            <% @tweets.each do |tweet| %>
-              <div class="card">
-                <div class="card-body">
-                  <%= tweet.created_at.strftime("%d %b, %H:%M") %>
-                  <br>
-                  <%= tweet.tweet[0,150] %>
-                  &nbsp
-                  <%= link_to 'Edit', edit_tweet_path(tweet) %>
-                  <%= link_to 'Delete', tweet_path(tweet), method: :delete, data: { confirm: 'Sure?' } %>
-                </div>
-              </div>
-              <br>
-            <% end %>
+          <%= render partial: 'tweets' %>
         </div>
 
         <div class="col-sm-2" id="home-right">
