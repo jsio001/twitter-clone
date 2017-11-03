@@ -1,9 +1,5 @@
 class TweetsController < ApplicationController
 
-  def new
-    @tweet = Tweet.new
-  end
-
   def create
     @tweet = current_user.tweets.new(tweet_params)
     if @tweet.save

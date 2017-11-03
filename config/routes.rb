@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   post 'pages/follow/:id', to: 'pages#relate', as: :follow
   delete 'pages/unfollow/:poster_id', to: 'pages#unrelate', as: :unfollow
 
-  get 'pages/profile/:id', to: "pages#profile", as: :profile
+  get 'pages/profile_user/:id', to: 'pages#profile_user', as: :profile_user
+  # resources :profile, except: [:new, :index]
 
-  resources :tweets, except: [:index] do
+  resources :tweets, except: [:index, :new] do
     resources :tags
   end
 
